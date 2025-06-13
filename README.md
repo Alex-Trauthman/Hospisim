@@ -108,11 +108,13 @@ O sistema inclui dados iniciais (seed) com:
 ```
 Hospisim/
 ├── Controllers/          # Controllers MVC
-├── Models/              # Entidades e contexto do banco
+├── Models/              # Modelos De Mensagens De Erro
 ├── Views/               # Views Razor
 ├── Data/                # Configurações do Entity Framework
 ├── Migrations/          # Migrations do banco de dados
-└── wwwroot/            # Arquivos estáticos (CSS, JS, imagens)
+└── wwwroot/        # Arquivos estáticos (CSS, JS, imagens)
+Hospisim.domain
+├── Entitites/          # Declaração de Classes-Base
 ```
 
 ## 🔧 Principais Controllers
@@ -121,33 +123,7 @@ Hospisim/
 - **ProfissionaisSaudeController** - Gestão de profissionais
 - **AtendimentosController** - Controle de atendimentos
 - **ProntuariosController** - Gestão de prontuários
-- **ReceitasController** - Prescrições médicas
+- **PrescricoesController** - Prescrições médicas
 - **ExamesController** - Solicitação e resultados
 - **InternamentosController** - Controle de internações
 - **AltasHospitalaresController** - Processo de alta
-
-## 🎯 Objetivos Alcançados
-
-✅ **Modernização da gestão clínica**
-- Interface web moderna e intuitiva
-- Processos digitalizados e automatizados
-
-✅ **Segurança das informações**
-- Controle de acesso por usuário
-- Validação de dados em todas as operações
-
-✅ **Rastreabilidade completa**
-- Histórico detalhado de todos os atendimentos
-- Vinculação entre pacientes, profissionais e procedimentos
-
-✅ **Controle total de informações**
-- Cadastro completo de pacientes
-- Gestão integrada de todos os processos hospitalares
-
-## 📞 Suporte
-
-Para dúvidas ou sugestões sobre o sistema, entre em contato através dos canais oficiais do Hospital Vida Plena.
-
----
-
-**HOSPISIM** - Modernizando a gestão hospitalar com tecnologia e eficiência.
