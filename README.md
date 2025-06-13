@@ -46,6 +46,8 @@ O HOSPISIM é uma aplicação web desenvolvida em ASP.NET Core MVC que oferece u
 - Controle de status e localização
 
 ### Relacionamentos:
+![image](https://github.com/user-attachments/assets/1143e9be-ff1e-4f27-b2f2-95b927984be8)
+
 ```
 Paciente (1:N) Prontuário (1:N) Atendimento
 Profissional (N:1) Especialidade
