@@ -55,16 +55,20 @@ namespace Hospisim.Controllers
                 .OrderByDescending(p => p.Numero)
                 .FirstOrDefault();
 
-            string novoNumero = "P001";
+            string novoNumero = "RONT-2024-0001";
             if (ultimoProntuario != null)
             {
-                int numeroAtual = int.Parse(ultimoProntuario.Numero.Substring(1));
-                novoNumero = $"P{(numeroAtual + 1).ToString("D3")}";
+                var partes = ultimoProntuario.Numero.Split('-');
+                if (partes.Length == 3 && int.TryParse(partes[2], out int numeroAtual))
+                {
+                    novoNumero = $"RONT-2024-{(numeroAtual + 1).ToString("D4")}";
+                }
             }
 
             ViewBag.NovoNumero = novoNumero;
             return View();
         }
+
 
         // POST: Prontuarios/Create
         [HttpPost]
