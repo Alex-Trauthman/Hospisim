@@ -1,0 +1,53 @@
+@model Hospisim.Domain.Entities.Prontuario
+
+@{
+    ViewData["Title"] = "Editar Prontuário";
+}
+
+<h1>Editar Prontuário</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" readonly />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PacienteId" class="control-label">Paciente</label>
+                <select asp-for="PacienteId" class="form-control" asp-items="ViewBag.PacienteId" disabled>
+                    <option value="">Selecione um paciente</option>
+                </select>
+                <input type="hidden" asp-for="PacienteId" />
+                <span asp-validation-for="PacienteId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataAbertura" class="control-label"></label>
+                <input asp-for="DataAbertura" class="form-control" type="date" />
+                <span asp-validation-for="DataAbertura" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ObservacoesGerais" class="control-label"></label>
+                <textarea asp-for="ObservacoesGerais" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="ObservacoesGerais" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

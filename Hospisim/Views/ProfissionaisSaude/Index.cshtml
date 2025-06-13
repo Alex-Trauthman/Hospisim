@@ -1,0 +1,53 @@
+@model IEnumerable<Hospisim.Domain.Entities.ProfissionalSaude>
+
+@{
+    ViewData["Title"] = "Profissionais de Saúde";
+}
+
+<h1>Profissionais de Saúde</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo Profissional</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NomeCompleto)</th>
+            <th>@Html.DisplayNameFor(model => model.RegistroConselho)</th>
+            <th>@Html.DisplayNameFor(model => model.Especialidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th>@Html.DisplayNameFor(Model => Model.Turno)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NomeCompleto)</td>
+                <td>@Html.DisplayFor(modelItem => item.RegistroConselho)</td>
+                <td>@Html.DisplayFor(modelItem => item.Especialidade.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>
+                    @if (item.Ativo)
+                    {
+                        <span class="badge bg-success">Ativo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inativo</span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Turno)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+@model Hospisim.Domain.Entities.Exame
+
+@{
+    ViewData["Title"] = "Detalhes do Exame";
+}
+
+<h1>Detalhes do Exame</h1>
+
+<div>
+    <h4>Exame</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataSolicitacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataSolicitacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataRealizacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataRealizacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resultado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Resultado)
+        </dd>
+        <dt class = "col-sm-2">
+            Paciente
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Atendimento.Paciente.NomeCompleto)
+        </dd>
+        <dt class = "col-sm-2">
+            Médico Solicitante
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Atendimento.ProfissionalSaude.NomeCompleto)
+        </dd>
+        <dt class = "col-sm-2">
+            Data do Atendimento
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Atendimento.DataHora)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a> |
+    <a asp-action="Index">Voltar à Lista</a>
+</div>

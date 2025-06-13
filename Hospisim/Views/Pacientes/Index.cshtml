@@ -1,0 +1,41 @@
+@model IEnumerable<Hospisim.Domain.Entities.Paciente>
+
+@{
+    ViewData["Title"] = "Pacientes";
+}
+
+<h1>Pacientes</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Novo Paciente</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome Completo</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Telefone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var paciente in Model)
+        {
+            <tr>
+                <td>@paciente.NomeCompleto</td>
+                <td>@paciente.CPF</td>
+                <td>@paciente.DataNascimento.ToString("dd/MM/yyyy")</td>
+                <td>@paciente.Sexo</td>
+                <td>@paciente.Telefone</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@paciente.Id" class="btn btn-info btn-sm">Detalhes</a>
+                    <a asp-action="Edit" asp-route-id="@paciente.Id" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@paciente.Id" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

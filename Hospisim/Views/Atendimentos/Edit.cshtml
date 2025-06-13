@@ -1,0 +1,92 @@
+@model Hospisim.Domain.Entities.Atendimento
+
+@{
+    ViewData["Title"] = "Editar Atendimento";
+}
+
+<h1>Editar Atendimento</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DataHora" class="control-label"></label>
+                        <input asp-for="DataHora" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="DataHora" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Tipo" class="control-label"></label>
+                        <select asp-for="Tipo" class="form-control">
+                            <option value="">Selecione o tipo</option>
+                            <option value="consulta">Consulta</option>
+                            <option value="emergência">Emergência</option>
+                            <option value="internação">Internação</option>
+                            <option value="retorno">Retorno</option>
+                            <option value="exame">Exame</option>
+                        </select>
+                        <span asp-validation-for="Tipo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProntuarioId" class="control-label">Prontuário</label>
+                <select asp-for="ProntuarioId" class="form-control" asp-items="ViewBag.ProntuarioId" disabled>
+                    <option value="">Selecione um prontuário</option>
+                </select>
+                <input type="hidden" asp-for="ProntuarioId" />
+                <span asp-validation-for="ProntuarioId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PacienteId" class="control-label">Paciente</label>
+                <select asp-for="PacienteId" class="form-control" asp-items="ViewBag.PacienteId" disabled>
+                    <option value="">Selecione um paciente</option>
+                </select>
+                <input type="hidden" asp-for="PacienteId" />
+                <span asp-validation-for="PacienteId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProfissionalSaudeId" class="control-label">Profissional de Saúde</label>
+                <select asp-for="ProfissionalSaudeId" class="form-control" asp-items="ViewBag.ProfissionalSaudeId">
+                    <option value="">Selecione um profissional</option>
+                </select>
+                <span asp-validation-for="ProfissionalSaudeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Local" class="control-label"></label>
+                <textarea asp-for="Local" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Local" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="em andamento">Em Andamento</option>
+                    <option value="concluído">Concluído</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

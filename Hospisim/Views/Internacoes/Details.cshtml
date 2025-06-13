@@ -1,0 +1,51 @@
+@model Hospisim.Domain.Entities.Internacao
+
+@{
+    ViewData["Title"] = "Detalhes da Internação";
+}
+
+<h1>Detalhes da Internação</h1>
+
+<div>
+    <h4>Internação</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Paciente</dt>
+        <dd class="col-sm-9">@Model.Paciente?.NomeCompleto</dd>
+
+        <dt class="col-sm-3">Atendimento</dt>
+        <dd class="col-sm-9">@Model.Atendimento?.Id</dd>
+
+        <dt class="col-sm-3">Data de Entrada</dt>
+        <dd class="col-sm-9">@Model.DataEntrada.ToString("g")</dd>
+
+        <dt class="col-sm-3">Previsão de Alta</dt>
+        <dd class="col-sm-9">@Model.PrevisaoAlta?.ToString("g")</dd>
+
+        <dt class="col-sm-3">Motivo</dt>
+        <dd class="col-sm-9">@Model.MotivoInternacao</dd>
+
+        <dt class="col-sm-3">Quarto</dt>
+        <dd class="col-sm-9">@Model.Quarto</dd>
+
+        <dt class="col-sm-3">Leito</dt>
+        <dd class="col-sm-9">@Model.Leito</dd>
+
+        <dt class="col-sm-3">Setor</dt>
+        <dd class="col-sm-9">@Model.Setor</dd>
+
+        <dt class="col-sm-3">Plano de Saúde</dt>
+        <dd class="col-sm-9">@Model.PlanoSaudeUtilizado</dd>
+
+        <dt class="col-sm-3">Observações Clínicas</dt>
+        <dd class="col-sm-9">@Model.ObservacoesClinicas</dd>
+
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Model.StatusInternacao</dd>
+    </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a> |
+        <a asp-action="Index" class="btn btn-secondary">Voltar à Lista</a>
+    </div>
+</div>

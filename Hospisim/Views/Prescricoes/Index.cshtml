@@ -1,0 +1,45 @@
+@model IEnumerable<Hospisim.Domain.Entities.Prescricao>
+
+@{
+    ViewData["Title"] = "Prescrições";
+}
+
+<h1>Prescrições</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nova Prescrição</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Medicamento</th>
+            <th>Dosagem</th>
+            <th>Frequência</th>
+            <th>Status</th>
+            <th>Data Início</th>
+            <th>Profissional</th>
+            <th>Paciente</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Medicamento</td>
+                <td>@item.Dosagem</td>
+                <td>@item.Frequencia</td>
+                <td>@item.StatusPrescricao</td>
+                <td>@item.DataInicio.ToShortDateString()</td>
+                <td>@item.Profissional?.NomeCompleto</td>
+                <td>@item.Atendimento?.Paciente?.NomeCompleto</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

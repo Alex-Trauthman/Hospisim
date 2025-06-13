@@ -1,0 +1,49 @@
+@model Hospisim.Domain.Entities.AltaHospitalar
+
+@{
+    ViewData["Title"] = "Editar Alta Hospitalar";
+}
+
+<h1>Editar Alta Hospitalar</h1>
+
+<h4>Alta Hospitalar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="InternacaoId" class="control-label">Internacao</label>
+                <select asp-for="InternacaoId" class="form-control" asp-items="ViewBag.InternacaoId"></select>
+                <span asp-validation-for="InternacaoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" type="datetime-local" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CondicaoPaciente" class="control-label"></label>
+                <input asp-for="CondicaoPaciente" class="form-control" />
+                <span asp-validation-for="CondicaoPaciente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InstrucoesPosAlta" class="control-label"></label>
+                <textarea asp-for="InstrucoesPosAlta" class="form-control"></textarea>
+                <span asp-validation-for="InstrucoesPosAlta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar à Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

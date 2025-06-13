@@ -1,0 +1,48 @@
+@model IEnumerable<Hospisim.Domain.Entities.Atendimento>
+
+@{
+    ViewData["Title"] = "Atendimentos";
+}
+
+<h1>Atendimentos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo Atendimento</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DataHora)</th>
+            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.Paciente)</th>
+            <th>@Html.DisplayNameFor(model => model.ProfissionalSaude)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DataHora)</td>
+                <td>
+                    <span class="badge bg-@(item.Tipo == "emergência" ? "danger" : item.Tipo == "internação" ? "warning" : "primary")">
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </span>
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Paciente.NomeCompleto)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProfissionalSaude.NomeCompleto)</td>
+                <td>
+                    <span class="badge bg-@(item.Status == "concluído" ? "success" : item.Status == "cancelado" ? "danger" : "warning")">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

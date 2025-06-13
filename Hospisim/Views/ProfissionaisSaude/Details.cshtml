@@ -1,0 +1,80 @@
+@model Hospisim.Domain.Entities.ProfissionalSaude
+
+@{
+    ViewData["Title"] = "Detalhes do Profissional";
+}
+
+<h1>Detalhes do Profissional</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.NomeCompleto)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.NomeCompleto)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.CPF)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.CPF)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.RegistroConselho)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.RegistroConselho)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.TipoRegistro)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.TipoRegistro)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Especialidade)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Especialidade.Nome)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Telefone)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Telefone)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DataAdmissao)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataAdmissao)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Ativo)</dt>
+        <dd class="col-sm-10">
+            @if (Model.Ativo)
+            {
+                <span class="badge bg-success">Ativo</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">Inativo</span>
+            }
+        </dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Turno)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Turno)</dd>
+     </dl>
+
+    @if (Model.Atendimentos != null && Model.Atendimentos.Any())
+    {
+        <h3>Últimos Atendimentos</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Tipo</th>
+                    <th>Paciente</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var atendimento in Model.Atendimentos.Take(10))
+                {
+                    <tr>
+                        <td>@atendimento.DataHora</td>
+                        <td>@atendimento.Tipo</td>
+                        <td>@atendimento.Paciente?.NomeCompleto</td>
+                        <td>@atendimento.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</div>

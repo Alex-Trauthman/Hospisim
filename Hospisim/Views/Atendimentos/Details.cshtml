@@ -1,0 +1,137 @@
+@model Hospisim.Domain.Entities.Atendimento
+
+@{
+    ViewData["Title"] = "Detalhes do Atendimento";
+}
+
+<h1>Detalhes do Atendimento</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DataHora)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DataHora)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Tipo)</dt>
+        <dd class="col-sm-10">
+            <span class="badge bg-@(Model.Tipo == "emergência" ? "danger" : Model.Tipo == "internação" ? "warning" : "primary")">
+                @Html.DisplayFor(model => model.Tipo)
+            </span>
+        </dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Status)</dt>
+        <dd class="col-sm-10">
+            <span class="badge bg-@(Model.Status == "concluído" ? "success" : Model.Status == "cancelado" ? "danger" : "warning")">
+                @Html.DisplayFor(model => model.Status)
+            </span>
+        </dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Paciente)</dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Paciente.NomeCompleto)
+            <a asp-controller="Pacientes" asp-action="Details" asp-route-id="@Model.PacienteId" class="btn btn-sm btn-link">Ver Paciente</a>
+        </dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Prontuario)</dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prontuario.Numero)
+            <a asp-controller="Prontuarios" asp-action="Details" asp-route-id="@Model.ProntuarioId" class="btn btn-sm btn-link">Ver Prontuário</a>
+        </dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.ProfissionalSaude)</dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProfissionalSaude.NomeCompleto) - @Html.DisplayFor(model => model.ProfissionalSaude.Especialidade.Nome)
+        </dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Local)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Local)</dd>
+    </dl>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            @if (Model.Prescricoes != null && Model.Prescricoes.Any())
+            {
+                <h3>Prescrições</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Medicamento</th>
+                            <th>Dosagem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prescricao in Model.Prescricoes)
+                        {
+                            <tr>
+                                <td>@prescricao.DataInicio.ToShortDateString()</td>
+                                <td>@prescricao.Medicamento</td>
+                                <td>@prescricao.Dosagem</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+        <div class="col-md-6">
+            @if (Model.Exames != null && Model.Exames.Any())
+            {
+                <h3>Exames</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Data Solicitação</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var exame in Model.Exames)
+                        {
+                            <tr>
+                                <td>@exame.DataSolicitacao.ToShortDateString()</td>
+                                <td>@exame.Tipo</td>
+                                <td>@exame.Resultado</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    @if (Model.Internacao != null)
+    {
+        <h3>Internação</h3>
+        <dl class="row">
+            <dt class="col-sm-2">Data Entrada</dt>
+            <dd class="col-sm-10">@Model.Internacao.DataEntrada</dd>
+
+            <dt class="col-sm-2">Quarto</dt>
+            <dd class="col-sm-10">@Model.Internacao.Quarto</dd>
+
+            <dt class="col-sm-2">Leito</dt>
+            <dd class="col-sm-10">@Model.Internacao.Leito</dd>
+
+            @if (Model.Internacao.AltaHospitalar != null)
+            {
+                <dt class="col-sm-2">Data Alta</dt>
+                <dd class="col-sm-10">@Model.Internacao.AltaHospitalar.Data</dd>
+
+                <dt class="col-sm-2">Tipo Alta</dt>
+                <dd class="col-sm-10">@Model.Internacao.AltaHospitalar.CondicaoPaciente</dd>
+            }
+        </dl>
+    }
+</div>
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a>
+    <a asp-controller="Prescricoes" asp-action="Create" asp-route-atendimentoId="@Model?.Id" class="btn btn-success">Nova Prescrição</a>
+    <a asp-controller="Exames" asp-action="Create" asp-route-atendimentoId="@Model?.Id" class="btn btn-success">Solicitar Exame</a>
+    @if (Model?.Tipo == "internação" && Model?.Internacao == null)
+    {
+        <a asp-controller="Internacoes" asp-action="Create" asp-route-atendimentoId="@Model?.Id" class="btn btn-danger">Registrar Internação</a>
+    }
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</div>
